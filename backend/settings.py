@@ -61,7 +61,6 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'import_export',
-    'anymail',
     'storages',
 ]
 
@@ -183,15 +182,15 @@ REST_FRAMEWORK = {
     )
 }
 
-ANYMAIL = {
-    "MAILGUN_API_KEY": env("MAILGUN_API_KEY"),
-    "MAILGUN_SENDER_DOMAIN": env("MAILGUN_SENDER_DOMAIN"),
-}
-
-FROM_EMAIL = "desphixs@gmail.com"
-EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
-DEFAULT_FROM_EMAIL = "desphixs@gmail.com"
-SERVER_EMAIL = "desphixs@gmail.com"
+# Remove Mailgun and Email settings
+# EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+# FROM_EMAIL = "desphixs@gmail.com"
+# DEFAULT_FROM_EMAIL = "desphixs@gmail.com"
+# SERVER_EMAIL = "desphixs@gmail.com"
+# ANYMAIL = {
+#     "MAILGUN_API_KEY": env("MAILGUN_API_KEY"),
+#     "MAILGUN_SENDER_DOMAIN": env("MAILGUN_SENDER_DOMAIN"),
+# }
 
 CORS_ALLOW_ALL_ORIGINS = True
 
