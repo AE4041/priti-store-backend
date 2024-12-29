@@ -22,20 +22,18 @@ env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-b*tuoe%^o+=^35$0fufrm=oamh^(o0tabn39(7ni12(i-oup+4'
+SECRET_KEY = env("SECRET_KEY", default='django-insecure-b*tuoe%^o+=^35$0fufrm=oamh^(o0tabn39(7ni12(i-oup+4')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool("DEBUG", default=True)
 
-ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = ['https://website-domain.com', 'https://127.0.0.1']
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["*"])
+CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", default=['https://website-domain.com', 'https://127.0.0.1'])
 SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
-
 
 # Application definition
 
@@ -49,7 +47,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
 
     # Custom Apps
     'userauths',
@@ -66,8 +63,6 @@ INSTALLED_APPS = [
     'import_export',
     'anymail',
     'storages',
-
-
 ]
 
 MIDDLEWARE = [
@@ -102,28 +97,22 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',  # The database name
-        'USER': 'postgres',  # The user
-        'PASSWORD': 'HpmhkLvgaBdFxpqKwgKKWjZIJnIqMHds',  # The password
-        'HOST': 'postgres.railway.internal',  # The host address (internal host for Railway)
-        'PORT': '5432',  # The port
+        'NAME': env("DB_NAME", default='railway'),
+        'USER': env("DB_USER", default='postgres'),
+        'PASSWORD': env("DB_PASSWORD", default='HpmhkLvgaBdFxpqKwgKKWjZIJnIqMHds'),
+        'HOST': env("DB_HOST", default='postgres.railway.internal'),
+        'PORT': env("DB_PORT", default='5432'),
     }
 }
 
-
-
-
-
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -143,7 +132,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -155,7 +143,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
@@ -166,11 +153,10 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-
 # AWS Configs
-AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
-AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
+AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = env("AWS_STORAGE_BUCKET_NAME")
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = 'public-read'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
@@ -180,7 +166,6 @@ AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 AWS_LOCATION = 'static'
 STATIC_LOCATION = 'static'
 STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -207,17 +192,16 @@ REST_FRAMEWORK = {
 }
 
 ANYMAIL = {
-    "MAILGUN_API_KEY": os.environ.get("MAILGUN_API_KEY"),
-    "MAILGUN_SENDER_DOMAIN": os.environ.get("MAILGUN_SENDER_DOMAIN"),
+    "MAILGUN_API_KEY": env("MAILGUN_API_KEY"),
+    "MAILGUN_SENDER_DOMAIN": env("MAILGUN_SENDER_DOMAIN"),
 }
 
-FROM_EMAIL = " desphixs@gmail.com"
+FROM_EMAIL = "desphixs@gmail.com"
 EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
-DEFAULT_FROM_EMAIL = " desphixs@gmail.com"
-SERVER_EMAIL = " desphixs@gmail.com"
+DEFAULT_FROM_EMAIL = "desphixs@gmail.com"
+SERVER_EMAIL = "desphixs@gmail.com"
 
 CORS_ALLOW_ALL_ORIGINS = True
-
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
@@ -250,7 +234,6 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
-
 
 JAZZMIN_SETTINGS = {
     "site_title": "Desphixs",
@@ -322,7 +305,6 @@ JAZZMIN_SETTINGS = {
         "auth.group": "vertical_tabs",
     },
 }
-
 
 JAZZMIN_UI_TWEAKS = {
     "navbar_small_text": False,
