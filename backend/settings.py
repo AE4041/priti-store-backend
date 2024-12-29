@@ -108,10 +108,17 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',  # The database name
+        'USER': 'postgres',  # The user
+        'PASSWORD': 'HpmhkLvgaBdFxpqKwgKKWjZIJnIqMHds',  # The password
+        'HOST': 'postgres.railway.internal',  # The host address (internal host for Railway)
+        'PORT': '5432',  # The port
     }
 }
+
+
+
 
 
 db_from_env = dj_database_url.config(conn_max_age=600)
