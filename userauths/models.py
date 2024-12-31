@@ -39,14 +39,16 @@ def user_directory_path(instance, filename):
         return 'user_{0}/{1}'.format('file', filename)
     
 
-    
+
+
 class User(AbstractUser):
     username = models.CharField(max_length=500, null=True, blank=True)
     email = models.EmailField(unique=True)
     full_name = models.CharField(max_length=500, null=True, blank=True)
     phone = models.CharField(max_length=500)
     otp = models.CharField(max_length=1000, null=True, blank=True)
-    reset_token  = models.CharField(max_length=1000, null=True, blank=True)
+    reset_token = models.CharField(max_length=1000, null=True, blank=True)
+    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)  # Adding avatar field
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
@@ -59,11 +61,12 @@ class User(AbstractUser):
 
     def save(self, *args, **kwargs):
         email_username, mobile = self.email.split('@')
-        if self.full_name == "" or self.full_name == None:
-             self.full_name = self.email
-        if self.username == "" or self.username == None:
-             self.username = email_username
+        if not self.full_name:
+            self.full_name = self.email
+        if not self.username:
+            self.username = email_username
         super(User, self).save(*args, **kwargs)
+
     
 
 

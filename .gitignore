@@ -121,7 +121,7 @@ env.bak/
 venv.bak/
 
 # Sensitive API key file (Add .env or your file containing secrets)
-.env
+
 
 # Spyder project settings
 .spyderproject
@@ -155,4 +155,4 @@ cython_debug/
 .idea/
 
 # .gitignore
-.env
+
