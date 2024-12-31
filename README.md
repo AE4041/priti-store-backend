@@ -1,2 +1,1 @@
-
-# priti-store-backend
+# Multivendor Ecommerce System API - Udemy Course

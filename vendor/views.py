@@ -37,13 +37,11 @@ from vendor.models import Vendor
 # Others Packages
 import json
 from decimal import Decimal
-
 import requests
 from datetime import datetime, timedelta
 import calendar
 import urllib
 import requests
-
 from datetime import datetime as d
 
 

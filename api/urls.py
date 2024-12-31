@@ -44,8 +44,7 @@ urlpatterns = [
     path('search/', store_views.SearchProductsAPIView.as_view(), name='search'),
 
     # Payment
-    path('stripe-checkout/<order_oid>/', store_views.StripeCheckoutView.as_view(), name='stripe-checkout'),
-    path('payment-success/', store_views.PaymentSuccessView.as_view(), name='payment-success'),
+    
 
     # Customer API Endpoints
     path('customer/orders/<user_id>/', customer_views.OrdersAPIView.as_view(), name='customer-orders'),

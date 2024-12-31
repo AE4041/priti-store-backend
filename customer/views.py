@@ -33,7 +33,6 @@ from vendor.models import Vendor
 # Others Packages
 import json
 from decimal import Decimal
-
 import requests
 
 class OrdersAPIView(generics.ListAPIView):
